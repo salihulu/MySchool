@@ -1,0 +1,76 @@
+        /*
+        Trigger2: 
+        •	Students fail when the average score is less than 40 or at least one of Math and English scores is less than 40;
+        •	Overall score is Pass if the average is between 40-59;
+        •	Overall score is Good if the average is between 60-79;
+        •	Overall score is Excellent if the average is between 80-100;
+        *Also validate that the value of Math, English, Geography and History is between 0-100.
+
+
+//Trigger Part
+trigger ReportCardTrigger on Report_Card__c (before insert, before update) 
+{
+        
+    
+    if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)){
+        
+        ReportCardTriggerHandler.overallScore(Trigger.new);
+        //OR
+        //Alternative Way
+        // ReportCardTriggerHandler trg = new ReportCardTriggerHandler();
+        // trg.overallScore(Trigger.new);
+        
+
+        
+        
+//Send to Handler Part
+        for(Report_Card__c repCard : Trigger.new){
+            
+            if((repCard.English__c <0 || repCard.English__c > 100)
+               || (repCard.Geography__c <0 || repCard.Geography__c > 100) 
+               || (repCard.History__c <0 || repCard.History__c > 100) 
+               || (repCard.Math__c <0 || repCard.Math__c > 100) ){
+                repCard.addError('Enter a valid mark!');
+               } else if(repCard.Average__c <40 || repCard.Math__c <40 || repCard.English__c <40 ){
+                   repCard.Overall_Score__c  = 'Fail';
+               } else if(repCard.Average__c <60){
+                   repCard.Overall_Score__c  = 'Pass';
+               } else if(repCard.Average__c <80){
+                   repCard.Overall_Score__c  = 'Good';
+               } else if(repCard.Average__c <= 100){
+                   repCard.Overall_Score__c  = 'Excellent';
+               }
+                   
+        }  
+        */
+    }
+}
+
+
+//Handler Part
+
+public class ReportCardTriggerHandler {
+    
+    public static void overallScore(List<Report_Card__c> reportCardList){
+        
+           for(Report_Card__c repCard : reportCardList){
+            
+                if((repCard.English__c <0 || repCard.English__c > 100)
+                   || (repCard.Geography__c <0 || repCard.Geography__c > 100) 
+                   || (repCard.History__c <0 || repCard.History__c > 100) 
+                   || (repCard.Math__c <0 || repCard.Math__c > 100) ){
+                    repCard.addError('Enter a valid mark!');
+                   } else if(repCard.Average__c <40 || repCard.Math__c <40 || repCard.English__c <40 ){
+                       repCard.Overall_Score__c  = 'Fail';
+                   } else if(repCard.Average__c <60){
+                       repCard.Overall_Score__c  = 'Pass';
+                   } else if(repCard.Average__c <80){
+                       repCard.Overall_Score__c  = 'Good';
+                   } else if(repCard.Average__c <= 100){
+                       repCard.Overall_Score__c  = 'Excellent';
+                   }
+                       
+            } 
+    }
+
+}
