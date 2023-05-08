@@ -1,0 +1,35 @@
+TRIGGER EXAMPLES WITH CUSTOM OBJECTS
+Create an app with the name of MySchool with;
+•	Custom Object: Student
+•	Custom Object: Parent
+•	Custom Object: Report Card
+* Add a tab for each object. 
+Parent Object Fields:
+–	Name, 
+–	Address Line 1(text), 
+–	State/City(text), 
+–	Country(text), 
+–	email(email), 
+–	phone(phone),
+–	Child Number(number)
+–	Report Card Update Time (date time)
+Student Object Fields: 
+–	Name, 
+–	Parent(Master-Detail), 
+–	Address Line 1(text), 
+–	State/City(text), 
+–	Country(text), 
+–	Class(picklist:1A,1B,2A,2B,3A,3B,4A,4B,5A,5B), 
+–	email(email), 
+–	phone(phone),
+–	isActive(checkbox),
+Report Card Object Fields:
+–	Name (Auto Number), 
+–	Student(Master-Detail), 
+–	Academic Term(picklist: 2022-1, 2022-2, 2023-1, 2023-2),
+–	Math(Number), 
+–	English(Number), 
+–	History(Number), 
+–	Geography(Number), 
+–	Average(Formula), 
+–	Overall Score (picklist: Fail, Pass, Good, Excellent)
